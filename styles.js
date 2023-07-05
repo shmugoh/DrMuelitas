@@ -8,8 +8,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     HeadingText: {
-        fontSize: 32,
+        fontSize: 42,
         fontWeight: 'bold'
+    },
+    SubHeadingText: {
+        fontSize: 20,
+        // fontWeight: 'bold'
     }
 });
 
