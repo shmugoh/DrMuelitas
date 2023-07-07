@@ -14,6 +14,11 @@ const styles = StyleSheet.create({
     SubHeadingText: {
         fontSize: 20,
         // fontWeight: 'bold'
+    },
+    
+    ExplainMeVideo: {
+        width: 243,
+        height: 432,
     }
 });
 
