@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   ExplainMeVideo: {
     width: 243,
     height: 432,
+    borderRadius: 24,
   },
 
   ButtonSheet: {
@@ -81,6 +82,51 @@ const styles = StyleSheet.create({
     },
   },
 
+  TimeCard: {
+    container: {
+      backgroundColor: '#F0EFF4',
+      borderRadius: 15,
+      marginTop: 12,
+      // marginBottom: 12,
+      padding: 8,
+      paddingBottom: 12,
+    },
+
+    separator: {
+      borderBottomColor: '#D2D1D6',
+      borderBottomWidth: StyleSheet.hairlineWidth + 0.2,
+    },
+
+    text: {
+      color: '#020202',
+      padding: 12,
+      right: 18,
+      marginRight: 64,
+      fontSize: 18,
+      fontWeight: '500',
+    },
+    button: {
+      marginTop: 8,
+      marginRight: 4,
+      marginLeft: 4,
+      marginBottom: 8,
+      left: 15,
+      backgroundColor: '#D8D7DD',
+      width: 60,
+      height: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      borderRadius: 4,
+    },
+
+    buttonText: {
+      color: '#020202',
+      fontSize: 16,
+      fontWeight: '400',
+    },
+  },
+
   BottomSheet: {
     bottomContainer: {
       marginHorizontal: 15,
@@ -105,6 +151,7 @@ const styles = StyleSheet.create({
       height: 432,
       alignSelf: 'center',
       marginTop: 15,
+      borderRadius: 24,
     },
 
     bottomStyle: {

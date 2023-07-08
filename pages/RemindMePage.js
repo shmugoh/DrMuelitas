@@ -38,9 +38,9 @@ export default function RemindMePage({ navigation }) {
 
   // Reminders
   const [remindersTime, setRemindersTime] = useState([
-    { label: 'Recordatorio 1:', time: '00:00', isDatePickerVisible: false },
-    { label: 'Recordatorio 2:', time: '00:00', isDatePickerVisible: false },
-    { label: 'Recordatorio 3:', time: '00:00', isDatePickerVisible: false },
+    { label: 'Recordatorio 1', time: '00:00', isDatePickerVisible: false },
+    { label: 'Recordatorio 2', time: '00:00', isDatePickerVisible: false },
+    { label: 'Recordatorio 3', time: '00:00', isDatePickerVisible: false },
   ]);
   const showDatePicker = (index) => {
     const updatedReminders = [...remindersTime];
@@ -87,29 +87,39 @@ export default function RemindMePage({ navigation }) {
       <Text style={styles.SubHeadingText}>Defina cada cuanto quieres que te lo recuerde</Text>
       {weekdays.map((day, index) => (
         <View key={day} style={styles.ButtonSheet.buttonRowContainer}>
+          <Text style={{ marginBottom: 4, fontSize: 18 }}>{day}</Text>
           <Checkbox
             value={checkedWeekdays[index]}
             onValueChange={() => handleCheckboxChange(index)}
             style={{ marginRight: 5 }}
           />
-          <Text style={{ marginBottom: 4, fontSize: 18 }}>{day}</Text>
         </View>
       ))}
 
-      {remindersTime.map((reminder, index) => (
-        <View key={index} style={styles.ButtonSheet.buttonRowContainer}>
-          <Text style={{ marginTop: 8, fontSize: 18 }}>{reminder.label}</Text>
+      <View style={styles.TimeCard.container}>
+        {remindersTime.map((reminder, index) => (
+          <View key={index}>
+            <View style={styles.ButtonSheet.buttonRowContainer}>
+              <Text style={styles.TimeCard.text}>{reminder.label}</Text>
+              <TouchableOpacity
+                style={styles.TimeCard.button}
+                onPress={() => showDatePicker(index)}
+              >
+                <Text style={styles.TimeCard.buttonText}>{reminder.time}</Text>
+              </TouchableOpacity>
 
-          <Button title={reminder.time} onPress={() => showDatePicker(index)} />
-          <DateTimePickerModal
-            isVisible={reminder.isDatePickerVisible}
-            mode="time"
-            display="spinner"
-            onConfirm={(date) => handleConfirm(index, date)}
-            onCancel={() => hideDatePicker(index)}
-          />
-        </View>
-      ))}
+              <DateTimePickerModal
+                isVisible={reminder.isDatePickerVisible}
+                mode="time"
+                display="spinner"
+                onConfirm={(date) => handleConfirm(index, date)}
+                onCancel={() => hideDatePicker(index)}
+              />
+            </View>
+            {index !== remindersTime.length - 1 && <View style={styles.TimeCard.separator} />}
+          </View>
+        ))}
+      </View>
 
       <View style={styles.ButtonSheet.buttonRowContainer}>
         <TouchableOpacity
