@@ -42,7 +42,7 @@ export default function KnowMePage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.HeadingText}>Conoceme</Text>
+      {/* <Text style={styles.HeadingText}>Conoceme</Text> */}
       <Text style={styles.SubHeadingText}>Dime Tus Datos</Text>
       <TextInput
         style={{ height: 40 }}

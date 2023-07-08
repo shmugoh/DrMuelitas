@@ -83,7 +83,7 @@ export default function RemindMePage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.HeadingText}>Recuerdame</Text>
+      {/* <Text style={styles.HeadingText}>Recuerdame</Text> */}
       <Text style={styles.SubHeadingText}>Defina cada cuanto quieres que te lo recuerde</Text>
       {weekdays.map((day, index) => (
         <View key={day} style={{ flexDirection: 'row', marginTop: 5 }}>

@@ -8,7 +8,7 @@ export default function ExplainMePage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.HeadingText}>Explicame</Text>
+      {/* <Text style={styles.HeadingText}>Explicame</Text> */}
 
       <Video
         ref={video}

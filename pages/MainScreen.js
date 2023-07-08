@@ -5,7 +5,7 @@ import styles from '../styles';
 export default function MainScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.HeadingText}>DrMuelitas</Text>
+      {/* <Text style={styles.HeadingText}>DrMuelitas</Text> */}
       <Button title="Conóceme" onPress={() => navigation.navigate('KnowMePage')} />
       <Button title="Explícame" onPress={() => navigation.navigate('ExplainMePage')} />
       <Button title="Recuérdamelo" onPress={() => navigation.navigate('RemindMePage')} />
