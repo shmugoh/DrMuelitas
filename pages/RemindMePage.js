@@ -1,9 +1,30 @@
 import { View, Text, Button } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Checkbox from 'expo-checkbox';
 import styles from '../styles';
+
+const storeReminders = async (reminders_time, reminders_weeekdays) => {
+  try {
+    await AsyncStorage.setItem('REMINDERS_TIME', JSON.stringify(reminders_time));
+    await AsyncStorage.setItem('REMINDERS_WEEKDAYS', JSON.stringify(reminders_weeekdays));
+  } catch (e) {
+    console.log(e);
+  }
+};
+const readReminders = async () => {
+  try {
+    const reminders_time = await AsyncStorage.getItem('REMINDERS_TIME');
+    const reminders_weeekdays = await AsyncStorage.getItem('REMINDERS_WEEKDAYS');
+    if (reminders_time !== null) {
+      return [JSON.parse(reminders_time), JSON.parse(reminders_weeekdays)];
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 export default function RemindMePage({ navigation }) {
   // Weekdays
@@ -16,27 +37,27 @@ export default function RemindMePage({ navigation }) {
   };
 
   // Reminders
-  const [reminders, setReminders] = useState([
+  const [remindersTime, setRemindersTime] = useState([
     { label: 'Recordatorio 1:', time: '00:00', isDatePickerVisible: false },
     { label: 'Recordatorio 2:', time: '00:00', isDatePickerVisible: false },
     { label: 'Recordatorio 3:', time: '00:00', isDatePickerVisible: false },
   ]);
   const showDatePicker = (index) => {
-    const updatedReminders = [...reminders];
+    const updatedReminders = [...remindersTime];
     updatedReminders[index].isDatePickerVisible = true;
-    setReminders(updatedReminders);
+    setRemindersTime(updatedReminders);
   };
   const hideDatePicker = (index) => {
-    const updatedReminders = [...reminders];
+    const updatedReminders = [...remindersTime];
     updatedReminders[index].isDatePickerVisible = false;
-    setReminders(updatedReminders);
+    setRemindersTime(updatedReminders);
   };
   const handleConfirm = (index, date) => {
     // Handle the selected date/time for the specific reminder
     // console.warn('A date has been picked: ', date);
-    const updatedReminders = [...reminders];
+    const updatedReminders = [...remindersTime];
     updatedReminders[index].time = formatTime(date);
-    setReminders(updatedReminders);
+    setRemindersTime(updatedReminders);
     hideDatePicker(index);
   };
   const formatTime = (date) => {
@@ -45,6 +66,20 @@ export default function RemindMePage({ navigation }) {
     const minutes = date.getMinutes();
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
   };
+
+  // Load Data from Storage
+  React.useEffect(() => {
+    (async () => {
+      const remindersData = await readReminders();
+      // console.log(remindersData);
+      setCheckedWeekdays(remindersData[0]);
+      setRemindersTime(remindersData[1]);
+    })();
+
+    return () => {
+      // cleans up function once components are unmounted
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -61,28 +96,30 @@ export default function RemindMePage({ navigation }) {
         </View>
       ))}
 
-      {reminders.map((reminder, index) => (
+      {remindersTime.map((reminder, index) => (
         <View key={index} style={{ flexDirection: 'row' }}>
           <Text style={{ marginTop: 7, fontSize: 18 }}>{reminder.label}</Text>
           <Button title={reminder.time} onPress={() => showDatePicker(index)} />
           <DateTimePickerModal
             isVisible={reminder.isDatePickerVisible}
             mode="time"
-            display="inline"
+            display="spinner"
             onConfirm={(date) => handleConfirm(index, date)}
             onCancel={() => hideDatePicker(index)}
           />
         </View>
       ))}
 
-      <Button
-        title="Guardar"
-        onPress={() => {
-          navigation.navigate('MainScreen');
-          console.warn(reminders);
-        }}
-      />
-      <Button title="Volver Atras" onPress={() => navigation.navigate('MainScreen')} />
+      <View style={{ flexDirection: 'row' }}>
+        <Button
+          title="Guardar"
+          onPress={() => {
+            navigation.navigate('MainScreen');
+            storeReminders(checkedWeekdays, remindersTime);
+          }}
+        />
+        <Button title="Volver Atras" onPress={() => navigation.navigate('MainScreen')} />
+      </View>
     </View>
   );
 }
