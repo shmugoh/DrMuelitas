@@ -22,12 +22,12 @@ export default function ExplainMePage({ navigation }) {
       />
 
       <TouchableOpacity
-        style={styles.ButtonSheet.smallButton}
+        style={styles.ButtonSheet.mediumButton}
         onPress={async () => {
           navigation.navigate('MainScreen');
         }}
       >
-        <Text style={styles.ButtonSheet.smallButtonText}>Volver Atras</Text>
+        <Text style={styles.ButtonSheet.mediumButtonText}>Volver Atras</Text>
       </TouchableOpacity>
     </View>
   );
