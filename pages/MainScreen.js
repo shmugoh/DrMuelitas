@@ -47,7 +47,6 @@ export default function MainScreen({ navigation }) {
       </TouchableOpacity>
 
       <StatusBar style="auto" />
-      {/* <WelcomeBottom /> */}
     </View>
   );
 }

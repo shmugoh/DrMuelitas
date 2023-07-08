@@ -18,7 +18,7 @@ const WelcomeBottom = () => {
   const video = useRef(null);
 
   // variables
-  const snapPoints = useMemo(() => ['78%'], []);
+  const snapPoints = useMemo(() => ['80%'], []);
 
   // callbacks
   const presentBottomSheetModal = useCallback(() => {
@@ -61,7 +61,10 @@ const WelcomeBottom = () => {
             isLooping
             shouldPlay
           />
-          <TouchableOpacity style={styles.ButtonSheet.bigButton} onPress={() => handleSnapPress(0)}>
+          <TouchableOpacity
+            style={{ ...styles.ButtonSheet.bigButton, marginBottom: 20 }}
+            onPress={() => handleSnapPress(0)}
+          >
             <Text style={styles.ButtonSheet.bigButtonText}>Iniciar</Text>
           </TouchableOpacity>
         </BottomSheetScrollView>

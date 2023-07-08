@@ -5,6 +5,9 @@ import MainScreen from './pages/MainScreen';
 import KnowMePage from './pages/KnowMePage';
 import ExplainMePage from './pages/ExplainMePage';
 import RemindMePage from './pages/RemindMePage';
+import WelcomeBottom from './pages/WelcomeBottom';
+
+import styles from './styles.js';
 
 const Stack = createNativeStackNavigator();
 const MyStack = () => {
@@ -19,18 +22,19 @@ const MyStack = () => {
         }}
       >
         <Stack.Screen name="MainScreen" component={MainScreen} options={{ title: 'DrMuelitas' }} />
-        <Stack.Screen name="KnowMePage" component={KnowMePage} options={{ title: 'Conoceme' }} />
+        <Stack.Screen name="KnowMePage" component={KnowMePage} options={{ title: 'Conóceme' }} />
         <Stack.Screen
           name="ExplainMePage"
           component={ExplainMePage}
-          options={{ title: 'Explicame' }}
+          options={{ title: 'Explícame' }}
         />
         <Stack.Screen
           name="RemindMePage"
           component={RemindMePage}
-          options={{ title: 'Recuerdame' }}
+          options={{ title: 'Recuérdamelo' }}
         />
       </Stack.Navigator>
+      {/* <WelcomeBottom /> */}
     </NavigationContainer>
   );
 };

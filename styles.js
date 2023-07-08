@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
 
     bottomStyle: {
       shadowOpacity: 0.3,
-      shadowRadius: 4,
+      shadowRadius: 50,
     },
   },
 });
