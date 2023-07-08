@@ -59,7 +59,7 @@ export default function KnowMePage({ navigation }) {
         onChangeText={onChangeLastName}
       />
 
-      <View style={buttonRowContainer}>
+      <View style={styles.ButtonSheet.buttonRowContainer}>
         <TouchableOpacity
           style={styles.ButtonSheet.smallButton}
           onPress={async () => {
