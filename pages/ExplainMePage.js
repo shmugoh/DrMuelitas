@@ -1,15 +1,14 @@
-import React from 'react';
-import { View, Text, Button } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
 import styles from '../styles';
 
 export default function ExplainMePage({ navigation }) {
-  const video = React.useRef(null);
+  const video = useRef(null);
 
   return (
     <View style={styles.container}>
       {/* <Text style={styles.HeadingText}>Explicame</Text> */}
-
       <Video
         ref={video}
         style={styles.ExplainMeVideo}
@@ -22,7 +21,14 @@ export default function ExplainMePage({ navigation }) {
         shouldPlay
       />
 
-      <Button title="Volver Atras" onPress={() => navigation.navigate('MainScreen')} />
+      <TouchableOpacity
+        style={styles.ButtonSheet.smallButton}
+        onPress={async () => {
+          navigation.navigate('MainScreen');
+        }}
+      >
+        <Text style={styles.ButtonSheet.smallButtonText}>Volver Atras</Text>
+      </TouchableOpacity>
     </View>
   );
 }

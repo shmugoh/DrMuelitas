@@ -61,11 +61,8 @@ const WelcomeBottom = () => {
             isLooping
             shouldPlay
           />
-          <TouchableOpacity
-            style={styles.BottomSheet.bottomButton}
-            onPress={() => handleSnapPress(0)}
-          >
-            <Text style={styles.BottomSheet.bottomButtonText}>Iniciar</Text>
+          <TouchableOpacity style={styles.ButtonSheet.bigButton} onPress={() => handleSnapPress(0)}>
+            <Text style={styles.ButtonSheet.bigButtonText}>Iniciar</Text>
           </TouchableOpacity>
         </BottomSheetScrollView>
       </BottomSheetModal>

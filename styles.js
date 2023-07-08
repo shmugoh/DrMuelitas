@@ -22,6 +22,65 @@ const styles = StyleSheet.create({
     height: 432,
   },
 
+  ButtonSheet: {
+    bigButton: {
+      marginTop: 15,
+      backgroundColor: '#f4f4f4',
+      width: 80 * 3,
+      height: 30 * 3,
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      borderRadius: 15,
+    },
+    bigButtonText: {
+      color: '#0080FB',
+      fontSize: 32,
+      fontWeight: '600',
+    },
+
+    mediumButton: {
+      marginTop: 15,
+      backgroundColor: '#f4f4f4',
+      width: 80 * 2,
+      height: 30 * 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      borderRadius: 15,
+    },
+    mediumButtonText: {
+      color: '#0080FB',
+      fontSize: 24,
+      fontWeight: '500',
+    },
+
+    smallButton: {
+      marginTop: 15,
+      marginRight: 4,
+      marginLeft: 4,
+      backgroundColor: '#f4f4f4',
+      width: 110,
+      height: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      borderRadius: 15,
+    },
+    smallButtonText: {
+      color: '#0080FB',
+      fontSize: 16,
+      fontWeight: '600',
+    },
+
+    buttonRowContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingHorizontal: 24,
+      marginTop: 5,
+    },
+  },
+
   BottomSheet: {
     bottomContainer: {
       marginHorizontal: 15,
@@ -46,22 +105,6 @@ const styles = StyleSheet.create({
       height: 432,
       alignSelf: 'center',
       marginTop: 15,
-    },
-
-    bottomButton: {
-      marginTop: 15,
-      backgroundColor: '#f4f4f4',
-      width: 80 * 3,
-      height: 30 * 3,
-      alignItems: 'center',
-      justifyContent: 'center',
-      alignSelf: 'center',
-      borderRadius: 15,
-    },
-    bottomButtonText: {
-      color: '#0080FB',
-      fontSize: 32,
-      fontWeight: '600',
     },
 
     bottomStyle: {

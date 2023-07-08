@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, TextInput, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from '../styles';
 
@@ -43,7 +43,7 @@ export default function KnowMePage({ navigation }) {
   return (
     <View style={styles.container}>
       {/* <Text style={styles.HeadingText}>Conoceme</Text> */}
-      <Text style={styles.SubHeadingText}>Dime Tus Datos</Text>
+      <Text style={styles.HeadingText}>Dime Tus Datos</Text>
       <TextInput
         style={{ height: 40 }}
         placeholder="Nombre"
@@ -59,15 +59,25 @@ export default function KnowMePage({ navigation }) {
         onChangeText={onChangeLastName}
       />
 
-      <View style={{ flexDirection: 'row' }}>
-        <Button
-          title="Guardar"
+      <View style={buttonRowContainer}>
+        <TouchableOpacity
+          style={styles.ButtonSheet.smallButton}
           onPress={async () => {
             storeName(FirstName, LastName);
             navigation.navigate('MainScreen');
           }}
-        />
-        <Button title="Volver Atras" onPress={() => navigation.navigate('MainScreen')} />
+        >
+          <Text style={styles.ButtonSheet.smallButtonText}>Guardar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.ButtonSheet.smallButton}
+          onPress={async () => {
+            navigation.navigate('MainScreen');
+          }}
+        >
+          <Text style={styles.ButtonSheet.smallButtonText}>Volver Atras</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

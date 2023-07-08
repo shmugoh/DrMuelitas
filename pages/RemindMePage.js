@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -86,7 +86,7 @@ export default function RemindMePage({ navigation }) {
       {/* <Text style={styles.HeadingText}>Recuerdame</Text> */}
       <Text style={styles.SubHeadingText}>Defina cada cuanto quieres que te lo recuerde</Text>
       {weekdays.map((day, index) => (
-        <View key={day} style={{ flexDirection: 'row', marginTop: 5 }}>
+        <View key={day} style={styles.ButtonSheet.buttonRowContainer}>
           <Checkbox
             value={checkedWeekdays[index]}
             onValueChange={() => handleCheckboxChange(index)}
@@ -97,8 +97,9 @@ export default function RemindMePage({ navigation }) {
       ))}
 
       {remindersTime.map((reminder, index) => (
-        <View key={index} style={{ flexDirection: 'row' }}>
-          <Text style={{ marginTop: 7, fontSize: 18 }}>{reminder.label}</Text>
+        <View key={index} style={styles.ButtonSheet.buttonRowContainer}>
+          <Text style={{ marginTop: 8, fontSize: 18 }}>{reminder.label}</Text>
+
           <Button title={reminder.time} onPress={() => showDatePicker(index)} />
           <DateTimePickerModal
             isVisible={reminder.isDatePickerVisible}
@@ -110,15 +111,25 @@ export default function RemindMePage({ navigation }) {
         </View>
       ))}
 
-      <View style={{ flexDirection: 'row' }}>
-        <Button
-          title="Guardar"
-          onPress={() => {
-            navigation.navigate('MainScreen');
+      <View style={styles.ButtonSheet.buttonRowContainer}>
+        <TouchableOpacity
+          style={styles.ButtonSheet.smallButton}
+          onPress={async () => {
             storeReminders(checkedWeekdays, remindersTime);
+            navigation.navigate('MainScreen');
           }}
-        />
-        <Button title="Volver Atras" onPress={() => navigation.navigate('MainScreen')} />
+        >
+          <Text style={styles.ButtonSheet.smallButtonText}>Guardar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.ButtonSheet.smallButton}
+          onPress={async () => {
+            navigation.navigate('MainScreen');
+          }}
+        >
+          <Text style={styles.ButtonSheet.smallButtonText}>Volver Atras</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
