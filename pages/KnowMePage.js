@@ -42,22 +42,25 @@ export default function KnowMePage({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.HeadingText}>Conoceme</Text> */}
-      <Text style={styles.HeadingText}>Dime Tus Datos</Text>
-      <TextInput
-        style={{ height: 40 }}
-        placeholder="Nombre"
-        autoComplete="given-name"
-        value={FirstName}
-        onChangeText={onChangeFirstName}
-      />
-      <TextInput
-        style={{ height: 40 }}
-        placeholder="Apellido"
-        autoComplete="family-name"
-        value={LastName}
-        onChangeText={onChangeLastName}
-      />
+      <View style={styles.TimeCard.container}>
+        <Text style={{ ...styles.HeadingText, padding: 8, marginBottom: 12 }}>Dime Tus Datos</Text>
+        <Text style={styles.SmallText}>Nombre</Text>
+        <TextInput
+          style={styles.TextBox}
+          placeholder="Nombre"
+          autoComplete="given-name"
+          value={FirstName}
+          onChangeText={onChangeFirstName}
+        />
+        <Text style={styles.SmallText}>Apellido</Text>
+        <TextInput
+          style={styles.TextBox}
+          placeholder="Apellido"
+          autoComplete="family-name"
+          value={LastName}
+          onChangeText={onChangeLastName}
+        />
+      </View>
 
       <View style={styles.ButtonSheet.buttonRowContainer}>
         <TouchableOpacity

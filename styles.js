@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   HeadingText: {
-    fontSize: 42,
+    fontSize: 32,
     fontWeight: 'bold',
   },
   SubHeadingText: {
@@ -24,6 +24,25 @@ const styles = StyleSheet.create({
     width: 243,
     height: 432,
     borderRadius: 24,
+  },
+
+  SmallText: {
+    fontSize: 16,
+    marginLeft: 4,
+    marginBottom: 5.5,
+    color: '#1C1C1E',
+    fontWeight: '600',
+  },
+  TextBox: {
+    height: 40,
+    borderRadius: 8,
+    borderWidth: 1,
+    backgroundColor: 'white',
+    borderColor: '#CCCCCC',
+    paddingHorizontal: 10,
+    marginTop: 10,
+    bottom: 8,
+    textAlign: 'center',
   },
 
   ButtonSheet: {
