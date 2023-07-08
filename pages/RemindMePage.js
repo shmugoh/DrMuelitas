@@ -82,12 +82,12 @@ export default function RemindMePage({ navigation }) {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, alignItems: null }}>
       {/* <Text style={styles.HeadingText}>Recuerdame</Text> */}
       <Text style={styles.SubHeadingText}>Defina cada cuanto quieres que te lo recuerde</Text>
       {weekdays.map((day, index) => (
-        <View key={day} style={styles.ButtonSheet.buttonRowContainer}>
-          <Text style={{ marginBottom: 4, fontSize: 18 }}>{day}</Text>
+        <View key={day} style={{ ...styles.ButtonSheet.buttonRowContainer }}>
+          <Text style={{ fontSize: 18, fontWeight: '500' }}>{day}</Text>
           <Checkbox
             value={checkedWeekdays[index]}
             onValueChange={() => handleCheckboxChange(index)}
@@ -121,25 +121,27 @@ export default function RemindMePage({ navigation }) {
         ))}
       </View>
 
-      <View style={styles.ButtonSheet.buttonRowContainer}>
-        <TouchableOpacity
-          style={styles.ButtonSheet.smallButton}
-          onPress={async () => {
-            storeReminders(checkedWeekdays, remindersTime);
-            navigation.navigate('MainScreen');
-          }}
-        >
-          <Text style={styles.ButtonSheet.smallButtonText}>Guardar</Text>
-        </TouchableOpacity>
+      <View style={{ alignItems: 'center' }}>
+        <View style={styles.ButtonSheet.buttonRowContainer}>
+          <TouchableOpacity
+            style={styles.ButtonSheet.smallButton}
+            onPress={async () => {
+              storeReminders(checkedWeekdays, remindersTime);
+              navigation.navigate('MainScreen');
+            }}
+          >
+            <Text style={styles.ButtonSheet.smallButtonText}>Guardar</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.ButtonSheet.smallButton}
-          onPress={async () => {
-            navigation.navigate('MainScreen');
-          }}
-        >
-          <Text style={styles.ButtonSheet.smallButtonText}>Volver Atras</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.ButtonSheet.smallButton}
+            onPress={async () => {
+              navigation.navigate('MainScreen');
+            }}
+          >
+            <Text style={styles.ButtonSheet.smallButtonText}>Volver Atras</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
