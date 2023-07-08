@@ -34,7 +34,7 @@ const MyStack = () => {
           options={{ title: 'Recuérdamelo' }}
         />
       </Stack.Navigator>
-      {/* <WelcomeBottom /> */}
+      <WelcomeBottom />
     </NavigationContainer>
   );
 };
