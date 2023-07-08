@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, Alert, BackHandler } from 'react-native';
+import { View, Button, Alert, BackHandler } from 'react-native';
+import React from 'react';
 import styles from '../styles';
+
+import WelcomeBottom from './WelcomeBottom';
 
 export default function MainScreen({ navigation }) {
   return (
@@ -25,6 +28,7 @@ export default function MainScreen({ navigation }) {
         }
       />
       <StatusBar style="auto" />
+      <WelcomeBottom />
     </View>
   );
 }
