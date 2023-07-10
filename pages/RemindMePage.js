@@ -2,9 +2,16 @@ import { View, Text, TouchableOpacity, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  registerForPushNotifications,
+  schedulePushNotification,
+  pushLocalNotification,
+  clearScheduledNotifications,
+} from '../services/NotificationService';
 
 import Checkbox from 'expo-checkbox';
 import styles from '../styles';
+import * as Notifications from 'expo-notifications';
 
 const storeReminders = async (reminders_time, reminders_weeekdays) => {
   try {
@@ -18,8 +25,9 @@ const readReminders = async () => {
   try {
     const reminders_time = await AsyncStorage.getItem('REMINDERS_TIME');
     const reminders_weeekdays = await AsyncStorage.getItem('REMINDERS_WEEKDAYS');
+    const data_name = await AsyncStorage.getItem('FirstName');
     if (reminders_time !== null) {
-      return [JSON.parse(reminders_time), JSON.parse(reminders_weeekdays)];
+      return [JSON.parse(reminders_time), JSON.parse(reminders_weeekdays), data_name];
     }
   } catch (e) {
     console.log(e);
@@ -28,7 +36,7 @@ const readReminders = async () => {
 
 export default function RemindMePage({ navigation }) {
   // Weekdays
-  const weekdays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  const weekdays = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   const [checkedWeekdays, setCheckedWeekdays] = useState(Array(7).fill(false));
   const handleCheckboxChange = (index) => {
     const updatedCheckedWeekdays = [...checkedWeekdays];
@@ -126,7 +134,23 @@ export default function RemindMePage({ navigation }) {
           <TouchableOpacity
             style={styles.ButtonSheet.smallButton}
             onPress={async () => {
-              storeReminders(checkedWeekdays, remindersTime);
+              // Stores Reminders on Storage
+              await storeReminders(checkedWeekdays, remindersTime);
+
+              // Clears any existing scheduled notifications
+              const notifsId = await AsyncStorage.getItem('NOTIFICATIONS_ID');
+              if (notifsId) {
+                await clearScheduledNotifications();
+                await AsyncStorage.removeItem('NOTIFICATIONS_ID');
+              }
+
+              // Schedules new notifications
+              const data = await readReminders();
+              const notificationsId = await schedulePushNotification(data);
+              console.log(notificationsId);
+              await AsyncStorage.setItem('NOTIFICATIONS_ID', JSON.stringify(notificationsId));
+
+              // Navigates to MainScreen
               navigation.navigate('MainScreen');
             }}
           >
