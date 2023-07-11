@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Platform, Dimensions } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Platform, Dimensions, Animated } from 'react-native';
 import { Video, ResizeMode } from 'expo-av';
+import { Ionicons } from '@expo/vector-icons';
 import styles from '../styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -10,10 +11,38 @@ export default function ExplainMePage({ navigation }) {
   const video = useRef(null);
   const videoWidth = Math.round(screenWidth * 0.8); // Adjust the scaling factor as needed
   const videoHeight = Math.round((videoWidth / 243) * 432); // Maintain aspect ratio
+  const [isPlaying, setIsPlaying] = useState(true);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: isPlaying ? 0 : 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+
+    console.log(fadeAnim);
+  }, [isPlaying, fadeAnim]);
+
+  const playPauseButtonStyle = {
+    position: 'absolute',
+    alignSelf: 'center',
+    zIndex: 1,
+    opacity: fadeAnim,
+  };
 
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.HeadingText}>Explicame</Text> */}
+      <Animated.View style={playPauseButtonStyle}>
+        <TouchableOpacity style={playPauseButtonStyle} onPress={() => setIsPlaying(!isPlaying)}>
+          {isPlaying ? (
+            <Ionicons name="pause" size={64} color="white" />
+          ) : (
+            <Ionicons name="play" size={64} color="white" />
+          )}
+        </TouchableOpacity>
+      </Animated.View>
+
       <Video
         ref={video}
         style={{
@@ -26,10 +55,9 @@ export default function ExplainMePage({ navigation }) {
         source={{
           uri: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
         }}
-        useNativeControls
         resizeMode={ResizeMode.CONTAIN}
         isLooping
-        shouldPlay
+        shouldPlay={isPlaying}
       />
 
       <TouchableOpacity
