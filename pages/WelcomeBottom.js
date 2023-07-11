@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, Dimensions, Platform } from 'react-native';
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -62,6 +62,11 @@ const WelcomeBottom = () => {
 
   const renderWelcomeBottom = () => {
     if (!sheetClosed) {
+      const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+
+      const videoWidth = Math.round(screenWidth * 0.6); // Adjust the scaling factor as needed
+      const videoHeight = Math.round((videoWidth / 243) * 432); // Maintain aspect ratio
+
       return (
         <BottomSheetModalProvider>
           <BottomSheetModal
@@ -72,7 +77,14 @@ const WelcomeBottom = () => {
             style={styles.BottomSheet.bottomStyle}
           >
             <BottomSheetView style={styles.BottomSheet.bottomContainer}>
-              <Text style={styles.BottomSheet.bottomTitle}>¡Hola, Soy Doc Muelitas!</Text>
+              <Text
+                style={{
+                  ...styles.BottomSheet.bottomTitle,
+                  fontSize: Platform.OS == 'android' ? 28 : 32,
+                }}
+              >
+                ¡Hola, Soy Doc Muelitas!
+              </Text>
             </BottomSheetView>
             <BottomSheetScrollView style={styles.BottomSheet.bottomContainer}>
               <Text style={styles.BottomSheet.bottomText}>
@@ -80,7 +92,13 @@ const WelcomeBottom = () => {
               </Text>
               <Video
                 ref={video}
-                style={styles.BottomSheet.bottomWelcomeVideo}
+                style={{
+                  ...styles.VideoSheet,
+                  width: videoWidth,
+                  height: videoHeight,
+                  marginTop: Platform.OS == 'android' ? 5 : 15,
+                  marginBottom: Platform.OS == 'ios' ? 15 : -5,
+                }}
                 source={{
                   uri: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4',
                 }}
@@ -89,13 +107,13 @@ const WelcomeBottom = () => {
                 shouldPlay
               />
               <TouchableOpacity
-                style={{ ...styles.ButtonSheet.bigButton, marginBottom: 20 }}
+                style={{ ...styles.ButtonSheet.mediumButton }}
                 onPress={async () => {
                   handleSnapPress(0);
                   storeFirstTimeSheetClosed();
                 }}
               >
-                <Text style={styles.ButtonSheet.bigButtonText}>Iniciar</Text>
+                <Text style={{ ...styles.ButtonSheet.bigButtonText }}>Iniciar</Text>
               </TouchableOpacity>
             </BottomSheetScrollView>
           </BottomSheetModal>

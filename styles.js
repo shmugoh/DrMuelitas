@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -20,9 +20,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  ExplainMeVideo: {
+
+  VideoSheet: {
     width: 243,
     height: 432,
+    margin: 'auto',
+    alignSelf: 'center',
     borderRadius: 24,
   },
 
@@ -103,6 +106,10 @@ const styles = StyleSheet.create({
       marginTop: 5,
     },
   },
+  buttonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
   TimeCard: {
     container: {
@@ -167,13 +174,6 @@ const styles = StyleSheet.create({
       color: 'black',
       letterSpacing: 0.5,
       textAlign: 'center',
-    },
-    bottomWelcomeVideo: {
-      width: 243,
-      height: 432,
-      alignSelf: 'center',
-      marginTop: 15,
-      borderRadius: 24,
     },
 
     bottomStyle: {
