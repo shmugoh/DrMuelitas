@@ -1,13 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import MainScreen from './pages/MainScreen';
-import KnowMePage from './pages/KnowMePage';
-import ExplainMePage from './pages/ExplainMePage';
-import RemindMePage from './pages/RemindMePage';
-import WelcomeBottom from './pages/WelcomeBottom';
+import MainScreen from './src/pages/MainScreen.js';
+import KnowMePage from './src/pages/KnowMePage.js';
+import ExplainMePage from './src/pages/ExplainMePage.js';
+import RemindMePage from './src/pages/RemindMePage.js';
+import WelcomeBottom from './src/pages/WelcomeBottom.js';
 
-import styles from './styles.js';
+import styles from './src/styles.js';
 
 const Stack = createNativeStackNavigator();
 const MyStack = () => {
